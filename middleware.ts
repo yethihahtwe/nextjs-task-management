@@ -12,7 +12,8 @@ export default clerkMiddleware(async (auth, req) => {
 
   // protect and redirect non-authenticated users from protected routes
   if (!userId && !isPublicRoute(req)){
-    return redirectToSignIn();
+    // let the user to sign in and return here after signed in
+    return redirectToSignIn({ returnBackUrl: req.url });
   }
 
   // redirect authenticated users out of public routes
